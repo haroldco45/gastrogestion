@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GastroGestión Pro - VIBRAS POSITIVAS HM</title>
+    <link rel="manifest" href="manifest.json">
+    <!-- Iconos Globales -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #1e272e;
+            --accent: #ff9f43;
+            --success: #10ac84;
+            --danger: #ee5253;
+            --bg-light: #f1f2f6;
+            --text-dark: #2f3542;
+            --text-light: #ffffff;
+            --shadow: 0 4px 12px rgba(0,0,0,0.1);
+            --border-radius: 12px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            background-color: var(--primary);
+            color: var(--text-light);
+            padding: 18px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow);
+        }
+
+        .logo-area h1 {
+            font-size: 1.35rem;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+        }
+
+        .logo-area span {
+            color: var(--accent);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            font-weight: bold;
+            display: block;
+            margin-top: 2px;
+        }
+
+        .geo-badge {
+            background-color: rgba(255,255,255,0.12);
+            padding: 8px 14px;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .container {
+            flex: 1;
+            padding: 16px;
+            max-width: 1100px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        /* Navegación por pestañas */
+        .nav-tabs {
+            display: flex;
+            overflow-x: auto;
+            background: white;
+            padding: 6px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            margin-bottom: 20px;
+            gap: 6px;
+            scrollbar-width: none;
+        }
+
+        .nav-tabs::-webkit-scrollbar {
+            display: none;
+        }
+
+        .tab-btn {
+            padding: 12px 18px;
+            border: none;
+            background: none;
+            font-weight: 600;
+            color: #747d8c;
+            cursor: pointer;
+            white-space: nowrap;
+            border-radius: 8px;
+            transition: all 0.25s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+        }
+
+        .tab-btn.active {
+            background-color: var(--accent);
+            color: var(--primary);
+        }
+
+        .tab-content {
+            display: none;
+            animation: slideUp 0.35s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 22px;
+            margin-bottom: 20px;
+            box-shadow: var(--shadow);
+            border-left: 6px solid var(--primary);
+        }
+
+        .card.accent-border {
+            border-left-color: var(--accent);
+        }
+
+        h2 {
+            font-size: 1.25rem;
+            margin-bottom: 16px;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        h3 {
+            font-size: 1.05rem;
+            margin: 18px 0 10px 0;
+            color: var(--primary);
+            border-bottom: 1px solid #f1f2f6;
+            padding-bottom: 6px;
+        }
+
+        p {
+            line-height: 1.6;
+            color: #57606f;
+            margin-bottom: 14px;
+            font-size: 0.95rem;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 600;
+            font-size: 0.88rem;
+            color: var(--text-dark);
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 11px 14px;
+            border: 1px solid #ced6e0;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            color: var(--text-dark);
+            background-color: #fff;
+            transition: border-color 0.2s;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .btn {
+            background-color: var(--primary);
+            color: white;
+            padding: 14px 20px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 700;
+            cursor: pointer;
+            width: 100%;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.95rem;
+            transition: background 0.2s;
+        }
+
+        .btn:hover {
+            background-color: #2f3542;
+        }
+
+        .btn-whatsapp {
+            background-color: #218c74;
+        }
+
+        .btn-whatsapp:hover {
+            background-color: #1b745f;
+        }
+
+        .result-box {
+            background-color: #f1f2f6;
+            padding: 16px;
+            border-radius: 8px;
+            margin-top: 16px;
+            border-left: 4px solid var(--accent);
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 16px;
+        }
+
+        @media(min-width: 768px) {
+            .grid-2 {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        footer {
+            background-color: var(--primary);
+            color: var(--text-light);
+            text-align: center;
+            padding: 24px 16px;
+            margin-top: auto;
+            font-size: 0.85rem;
+            border-top: 4px solid var(--accent);
+        }
+
+        footer a {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        #pwa-banner {
+            display: none;
+            background: var(--primary);
+            color: white;
+            padding: 14px 20px;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 2000;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 -4px 15px rgba(0,0,0,0.3);
+            border-top: 3px solid var(--accent);
+        }
+
+        #pwa-banner button {
+            background: var(--accent);
+            color: var(--primary);
+            border: none;
+            padding: 9px 16px;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo-area">
+            <h1>GastroGestión Pro</h1>
+            <span>Estándares de VIBRAS POSITIVAS HM</span>
+        </div>
+        <div class="geo-badge">
+            <i class="fas fa-map-marker-alt" style="color: var(--accent);"></i> 
+            <span id="geo-text">Buscando geolocalización...</span>
+        </div>
+    </header>
+
+    <div class="container">
+        <nav class="nav-tabs">
+            <button class="tab-btn active" onclick="switchTab('diag')"><i class="fas fa-chart-bar"></i> 1. Diagnóstico</button>
+            <button class="tab-btn" onclick="switchTab('plan')"><i class="fas fa-layer-group"></i> 2. Estrategia</button>
+            <button class="tab-btn" onclick="switchTab('cost')"><i class="fas fa-calculator"></i> 3. Costos e Insumos</button>
+            <button class="tab-btn" onclick="switchTab('menu')"><i class="fas fa-utensils"></i> 4. Menú e Ingeniería</button>
+            <button class="tab-btn" onclick="switchTab('mkt')"><i class="fas fa-ad"></i> 5. Comercialización</button>
+            <button class="tab-btn" onclick="switchTab('send')"><i class="fas fa-paper-plane"></i> Desplegar Plan</button>
+        </nav>
+
+        <!-- PESTAÑA 1: DIAGNÓSTICO -->
+        <section id="diag" class="tab-content active">
+            <div class="card">
+                <h2><i class="fas fa-clipboard-check"></i> Auditoría Inicial de Operaciones</h2>
+                <p>Determine el estado de madurez de su bar o restaurante analizando los procesos de control de acuerdo a las directrices técnicas del sector gastronómico.</p>
+                
+                <h3>Fichas Técnicas y Estandarización</h3>
+                <div class="form-group">
+                    <label>¿Dispone del desglose analítico de costos marginales por preparación?</label>
+                    <select id="diag_fichas">
+                        <option value="No">No poseo fichas técnicas, los precios se determinan de forma empírica</option>
+                        <option value="Parcial">Parcialmente estructuradas solo para los ítems de alta rotación</option>
+                        <option value="Si">Sí, el 100% de la carta está respaldada por recetas estándar</option>
+                    </select>
+                </div>
+
+                <h3>Mermas y Almacén</h3>
+                <div class="form-group">
+                    <label>¿Cómo se lleva a cabo la trazabilidad de inventarios?</label>
+                    <select id="diag_kardex">
+                        <option value="No">No registramos variaciones diarias de stock ni desperdicios</option>
+                        <option value="Parcial">Conteo físico periódico mensual sin monitoreo de mermas</option>
+                        <option value="Si">Kardex diario automatizado con porcentaje de merma integrado</option>
+                    </select>
+                </div>
+            </div>
+        </section>
+
+        <!-- PESTAÑA 2: PLANIFICACIÓN -->
+        <section id="plan" class="tab-content">
+            <div class="card accent-border">
+                <h2><i class="fas fa-compass"></i> Arquitectura Estratégica y Viabilidad</h2>
+                <p>Establezca los cimientos financieros y comerciales para garantizar la sostenibilidad operativa del negocio en el tiempo.</p>
+                
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label>Propuesta Única de Consumo:</label>
+                        <textarea id="plan_propuesta" rows="2" placeholder="Ej: Especialistas en mixología artesanal con destilados locales..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Segmento de Clientes Objetivo:</label>
+                        <textarea id="plan_target" rows="2" placeholder="Ej: Adultos profesionales entre 25-45 años interesados en maridaje..."></textarea>
+                    </div>
+                </div>
+
+                <h3>Análisis de Viabilidad Financiera</h3>
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label>Costos Fijos Operacionales Mensuales ($ COP):</label>
+                        <input type="number" id="plan_fijos" placeholder="Nóminas, arriendos, servicios públicos...">
+                    </div>
+                    <div class="form-group">
+                        <label>Consumo Promedio Estimado por Cliente ($ COP):</label>
+                        <input type="number" id="plan_ticket" placeholder="Ticket promedio por cubierto">
+                    </div>
+                </div>
+                <button class="btn" onclick="calcularPuntoEquilibrio()"><i class="fas fa-calculator"></i> Analizar Punto de Equilibrio</button>
+                <div id="box_equilibrio" class="result-box" style="display:none;"></div>
+            </div>
+        </section>
+
+        <!-- PESTAÑA 3: COSTOS -->
+        <section id="cost" class="tab-content">
+            <div class="card">
+                <h2><i class="fas fa-percentage"></i> Gestión de Márgenes e Insumos (Food Cost)</h2>
+                <p>Mantener el costo de materia prima dentro del umbral recomendado (25% - 35%) es el requerimiento esencial para la rentabilidad bruta de su cocina o barra.</p>
+                
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label>Denominación de la Referencia:</label>
+                        <input type="text" id="cost_nombre" placeholder="Ej: Coctel de la Casa / Plato Fuerte">
+                    </div>
+                    <div class="form-group">
+                        <label>Costo Total del Insumo Neto ($):</label>
+                        <input type="number" id="cost_insumo" placeholder="Costo total de ingredientes según receta base">
+                    </div>
+                    <div class="form-group">
+                        <label>Precio de Venta Planificado ($):</label>
+                        <input type="number" id="cost_venta" placeholder="Precio fijado en el menú al consumidor">
+                    </div>
+                    <div class="form-group">
+                        <label>Porcentaje de Costo Teórico Objetivo:</label>
+                        <select id="cost_objetivo">
+                            <option value="30">30% (Rendimiento Estándar)</option>
+                            <option value="25">25% (Rendimiento Altamente Rentable)</option>
+                            <option value="35">35% (Límite Máximo Permitido)</option>
+                        </select>
+                    </div>
+                </div>
+                <button class="btn" onclick="analizarFoodCost()"><i class="fas fa-coins"></i> Evaluar Margen de Contribución</button>
+                <div id="box_foodcost" class="result-box" style="display:none;"></div>
+            </div>
+        </section>
+
+        <!-- PESTAÑA 4: INGENIERÍA DE MENÚ -->
+        <section id="menu" class="tab-content">
+            <div class="card accent-border">
+                <h2><i class="fas fa-chart-pie"></i> Ingeniería de Menú y Protocolos</h2>
+                <p>Clasifique las preparaciones actuales según la matriz de popularidad y rentabilidad para reconfigurar estratégicamente su menú.</p>
+                
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label>Platos ESTRELLA (Alta Rentabilidad / Alta Rotación):</label>
+                        <input type="text" id="menu_estrella" placeholder="Items que lideran el margen bruto">
+                    </div>
+                    <div class="form-group">
+                        <label>Caballos de Batalla (Baja Rentabilidad / Alta Rotación):</label>
+                        <input type="text" id="menu_caballo" placeholder="Populares, pero requieren optimizar costo de insumos">
+                    </div>
+                    <div class="form-group">
+                        <label>Platos ENIGMA (Alta Rentabilidad / Baja Rotación):</label>
+                        <input type="text" id="menu_enigma" placeholder="Rentables, requieren estimulación en ventas o rediseño">
+                    </div>
+                    <div class="form-group">
+                        <label>Platos PERRO (Baja Rentabilidad / Baja Rotación):</label>
+                        <input type="text" id="menu_perro" placeholder="Candidatos a remoción inmediata del portafolio">
+                    </div>
+                </div>
+                <h3>Estandarización del Servicio</h3>
+                <p>Establezca de manera estricta la secuencia del cliente: saludo inicial, tiempos de respuesta para comandas, ventas cruzadas tácticas por el personal de servicio y cierre de cuentas.</p>
+            </div>
+        </section>
+
+        <!-- PESTAÑA 5: COMERCIALIZACIÓN -->
+        <section id="mkt" class="tab-content">
+            <div class="card">
+                <h2><i class="fas fa-bullseye"></i> Estrategias de Captación y Fidelidad</h2>
+                <p>Maximice el ciclo de vida del cliente mediante canales digitales eficientes y programas estructurados de recurrencia.</p>
+                
+                <div class="form-group">
+                    <label>Plan de Fidelización Preferente:</label>
+                    <select id="mkt_fidelidad">
+                        <option value="Puntos">Acumulación de beneficios cuantificables basados en consumo</option>
+                        <option value="Eventos">Experiencias inmersivas exclusivas para clientes registrados</option>
+                        <option value="Diferenciado">Tratamiento preferencial y descuentos dirigidos en horas valle</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Ecosistema Digital Activo:</label>
+                    <div style="margin-top: 8px; display: flex; flex-direction: column; gap: 8px;">
+                        <label style="font-weight: normal;"><input type="checkbox" id="net_geo" style="width:auto; margin-right:8px;" checked> Perfil de Google Business (Reseñas de Localización)</label>
+                        <label style="font-weight: normal;"><input type="checkbox" id="net_social" style="width:auto; margin-right:8px;" checked> Redes de Impacto Visual (Instagram / TikTok corporativo)</label>
+                        <label style="font-weight: normal;"><input type="checkbox" id="net_crm" style="width:auto; margin-right:8px;" checked> Gestión de Base de Datos Interactiva vía WhatsApp Business</label>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PESTAÑA 6: EXPORTACIÓN -->
+        <section id="send" class="tab-content">
+            <div class="card accent-border">
+                <h2><i class="fas fa-paper-plane"></i> Consolidación Total del Plan Estratégico</h2>
+                <p>Reúna los análisis consolidados en esta aplicación e instale o transmita los resultados de manera directa. El informe incluye los datos de posicionamiento satelital validados por el sistema.</p>
+                
+                <button class="btn btn-whatsapp" onclick="enviarDiagnosticoWhatsApp()"><i class="fab fa-whatsapp"></i> Exportar Auditoría Integrada a WhatsApp</button>
+            </div>
+        </section>
+    </div>
+
+    <div id="pwa-banner">
+        <span>GastroGestión Pro está disponible para instalar</span>
+        <button onclick="instalarAplicacion()">Instalar PWA</button>
+    </div>
+
+    <footer>
+        <p>&copy; 2026. Todos los derechos reservados. Desarrollado bajo la propiedad intelectual de <a href="https://www.vibraspositivashm.com" target="_blank">VIBRAS POSITIVAS HM</a>.</p>
+    </footer>
+
+    <script>
+        let coordenadasGlobales = "Ubicación geográfica no autorizada";
+
+        // Inicialización y Geolocalización
+        window.addEventListener('load', () => {
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.register('sw.js')
+                    .then(() => console.log('Service Worker registrado correctamente.'))
+                    .catch(err => console.error('Fallo en el registro del SW:', err));
+            }
+
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        coordenadasGlobales = `Lat: ${position.coords.latitude.toFixed(5)}, Lon: ${position.coords.longitude.toFixed(5)}`;
+                        document.getElementById('geo-text').innerText = coordenadasGlobales;
+                    },
+                    () => {
+                        coordenadasGlobales = "Caucasia, Antioquia, Colombia";
+                        document.getElementById('geo-text').innerText = coordenadasGlobales;
+                    }
+                );
+            } else {
+                coordenadasGlobales = "Geolocalización no soportada";
+                document.getElementById('geo-text').innerText = coordenadasGlobales;
+            }
+        });
+
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+            
+            document.getElementById(tabId).classList.add('active');
+            event.currentTarget.classList.add('active');
+        }
+
+        function calcularPuntoEquilibrio() {
+            const fijos = parseFloat(document.getElementById('plan_fijos').value) || 0;
+            const ticket = parseFloat(document.getElementById('plan_ticket').value) || 0;
+
+            if (fijos <= 0 || ticket <= 0) {
+                alert("Por favor inserte valores mayores a cero.");
+                return;
+            }
+
+            const margenContribucionEstándar = 0.65; // 65% de margen estimado según estructura del manual
+            const ventaEquilibrio = Math.round(fijos / margenContribucionEstándar);
+            const clientesMes = Math.round(ventaEquilibrio / ticket);
+            const clientesDia = Math.round(clientesMes / 30);
+
+            const box = document.getElementById('box_equilibrio');
+            box.style.display = 'block';
+            box.innerHTML = `
+                <strong>Métricas Financieras Críticas:</strong><br>
+                • Facturación Mensual de Equilibrio: <strong>$ ${ventaEquilibrio.toLocaleString()} COP</strong><br>
+                • Transacciones requeridas al Mes: <strong>${clientesMes} cubiertos</strong><br>
+                • Flujo operativo mínimo diario: <strong>${clientesDia} clientes/día</strong>
+            `;
+        }
+
+        function analizarFoodCost() {
+            const nombre = document.getElementById('cost_nombre').value || "Preparación Evaluada";
+            const insumo = parseFloat(document.getElementById('cost_insumo').value) || 0;
+            const venta = parseFloat(document.getElementById('cost_venta').value) || 0;
+            const objetivo = parseFloat(document.getElementById('cost_objetivo').value);
+
+            if (insumo <= 0 || venta <= 0) {
+                alert("Verifique que el costo de insumos y precio de venta sean correctos.");
+                return;
+            }
+
+            const foodCostReal = ((insumo / venta) * 100).toFixed(1);
+            const margenBruto = venta - insumo;
+            const precioSugerido = Math.round(insumo / (objetivo / 100));
+
+            const box = document.getElementById('box_foodcost');
+            box.style.display = 'block';
+
+            let dictamen = "";
+            if (foodCostReal > objetivo) {
+                dictamen = `<span style="color:var(--danger); font-weight:bold;"><i class="fas fa-exclamation-triangle"></i> Costo excedido (${foodCostReal}%). Se aconseja ingeniería de porciones o incremento de PVP.</span>`;
+            } else {
+                dictamen = `<span style="color:var(--success); font-weight:bold;"><i class="fas fa-check-circle"></i> Costo optimizado (${foodCostReal}%) de acuerdo a los estándares técnicos.</span>`;
+            }
+
+            box.innerHTML = `
+                <strong>Desglose de Costo - ${nombre}:</strong><br>
+                • Porcentaje de Costo Real: <strong>${foodCostReal}%</strong><br>
+                • Margen Bruto Unitario: <strong>$ ${margenBruto.toLocaleString()} COP</strong><br>
+                • Precio Recomendado de Venta (Objetivo ${objetivo}%): <strong>$ ${precioSugerido.toLocaleString()} COP</strong><br><br>
+                ${dictamen}
+            `;
+        }
+
+        function enviarDiagnosticoWhatsApp() {
+            const fichas = document.getElementById('diag_fichas').value;
+            const kardex = document.getElementById('diag_kardex').value;
+            const propuesta = document.getElementById('plan_propuesta').value || "No ingresado";
+            const estrella = document.getElementById('menu_estrella').value || "No definido";
+            const fidelidad = document.getElementById('mkt_fidelidad').value;
+
+            let stringPlan = `*GastroGestión Pro - Plan Estratégico*%0A`;
+            stringPlan += `_Propiedad Intelectual: VIBRAS POSITIVAS HM_%0A%0A`;
+            stringPlan += `*1. DIAGNÓSTICO OPERATIVO*%0A`;
+            stringPlan += `- Recetas Estándar: ${fichas}%0A`;
+            stringPlan += `- Gestión Almacén/Kardex: ${kardex}%0A%0A`;
+            stringPlan += `*2. ARQUITECTURA DE MARCA*%0A`;
+            stringPlan += `- Propuesta: ${propuesta}%0A`;
+            stringPlan += `- Referencias Estrella: ${estrella}%0A%0A`;
+            stringPlan += `*3. MERCADEO Y FIDELIZACIÓN*%0A`;
+            stringPlan += `- Modelo de Retención: ${fidelidad}%0A%0A`;
+            stringPlan += `*Geolocalización Homologada:* ${coordenadasGlobales}%0A%0A`;
+            stringPlan += `_Desarrollado y verificado por VIBRAS POSITIVAS HM_`;
+
+            window.open(`https://api.whatsapp.com/send?text=${stringPlan}`, '_blank');
+        }
+
+        // Lógica Captura de Instalación PWA
+        let appPrompt;
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            appPrompt = e;
+            document.getElementById('pwa-banner').style.display = 'flex';
+        });
+
+        function instalarAplicacion() {
+            if (appPrompt) {
+                appPrompt.prompt();
+                appPrompt.userChoice.then((choice) => {
+                    if (choice.outcome === 'accepted') {
+                        console.log('El usuario instaló la PWA de manera exitosa');
+                    }
+                    document.getElementById('pwa-banner').style.display = 'none';
+                    appPrompt = null;
+                });
+            }
+        }
+    </script>
+</body>
+</html>
