@@ -1,0 +1,17 @@
+{
+  "short_name": "GastroGestión",
+  "name": "GastroGestión Pro - VIBRAS POSITIVAS HM",
+  "description": "Herramienta PWA de Diagnóstico, Punto de Equilibrio y Costeo de Recetas.",
+  "start_url": "/index.html",
+  "background_color": "#1e272e",
+  "theme_color": "#1e272e",
+  "display": "standalone",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIiB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiI+PGNpcmNsZSBjeD0iMjU2IiBjeT0iMjU2IiByPSIyNTYiIGZpbGw9IiMxZTI3MmUiLz48cGF0aCBkPSJNMjU2IDEyMGw5NSA5NUgxNjF6IiBmaWxsPSIjZmY5ZjQzIi8+PC9zdmc+",
+      "type": "image/svg+xml",
+      "sizes": "512x512"
+    }
+  ]
+}
